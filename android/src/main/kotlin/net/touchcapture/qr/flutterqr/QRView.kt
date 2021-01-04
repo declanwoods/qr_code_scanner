@@ -10,10 +10,12 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import com.google.zxing.ResultPoint
+import com.google.zxing.BarcodeFormat;
 import android.hardware.Camera.CameraInfo
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.BarcodeView
+import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.PluginRegistry
@@ -121,6 +123,11 @@ class QRView(private val registrar: PluginRegistry.Registrar, id: Int) :
 
     private fun createBarCodeView(): BarcodeView? {
         val barcode = BarcodeView(registrar.activity())
+        barcode.setDecoderFactory(
+            DefaultDecoderFactory(
+                    list(BarcodeFormat.QR_CODE)
+            )
+        )
         barcode.decodeContinuous(
                 object : BarcodeCallback {
                     override fun barcodeResult(result: BarcodeResult) {
