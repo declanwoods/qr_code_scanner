@@ -125,7 +125,7 @@ class QRView(private val registrar: PluginRegistry.Registrar, id: Int) :
         val barcode = BarcodeView(registrar.activity())
         barcode.setDecoderFactory(
             DefaultDecoderFactory(
-                [BarcodeFormat.QR_CODE]
+                listOf(BarcodeFormat.QR_CODE)
             )
         )
         barcode.decodeContinuous(
